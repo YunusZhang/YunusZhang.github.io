@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>构建贝叶斯AB测试 | CKL</title>
+    <meta name="description" content="">
+    <link rel="icon" href="/img/logo.jpeg">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/2.10.0/github-markdown.min.css">
+    
+    <link rel="preload" href="/assets/css/0.styles.77d639ce.css" as="style"><link rel="preload" href="/assets/js/app.76659ae3.js" as="script"><link rel="preload" href="/assets/js/7.7c056201.js" as="script"><link rel="preload" href="/assets/js/21.adc9ee61.js" as="script"><link rel="prefetch" href="/assets/js/10.0524636a.js"><link rel="prefetch" href="/assets/js/11.947c16a3.js"><link rel="prefetch" href="/assets/js/12.51c4984b.js"><link rel="prefetch" href="/assets/js/13.ec23b4a0.js"><link rel="prefetch" href="/assets/js/14.0d704076.js"><link rel="prefetch" href="/assets/js/15.114d913b.js"><link rel="prefetch" href="/assets/js/16.94731e60.js"><link rel="prefetch" href="/assets/js/17.de3739c5.js"><link rel="prefetch" href="/assets/js/18.718702c6.js"><link rel="prefetch" href="/assets/js/19.44ce7a3e.js"><link rel="prefetch" href="/assets/js/2.38932ee6.js"><link rel="prefetch" href="/assets/js/20.95f77a6e.js"><link rel="prefetch" href="/assets/js/22.1a4d3107.js"><link rel="prefetch" href="/assets/js/23.ab28b9fb.js"><link rel="prefetch" href="/assets/js/24.f0491f8c.js"><link rel="prefetch" href="/assets/js/25.ebff061e.js"><link rel="prefetch" href="/assets/js/26.fd399e9e.js"><link rel="prefetch" href="/assets/js/27.4634fdc1.js"><link rel="prefetch" href="/assets/js/28.0d72eb05.js"><link rel="prefetch" href="/assets/js/29.e20e7f51.js"><link rel="prefetch" href="/assets/js/3.a3a27c44.js"><link rel="prefetch" href="/assets/js/30.4ef1be23.js"><link rel="prefetch" href="/assets/js/31.af729026.js"><link rel="prefetch" href="/assets/js/32.b74e43bc.js"><link rel="prefetch" href="/assets/js/33.1fc9bd38.js"><link rel="prefetch" href="/assets/js/34.4c884e92.js"><link rel="prefetch" href="/assets/js/35.69ef4130.js"><link rel="prefetch" href="/assets/js/36.f9a6fa95.js"><link rel="prefetch" href="/assets/js/37.d3f2b3c3.js"><link rel="prefetch" href="/assets/js/38.adb7b35e.js"><link rel="prefetch" href="/assets/js/39.ec26ba26.js"><link rel="prefetch" href="/assets/js/4.dd247e61.js"><link rel="prefetch" href="/assets/js/40.3f22cde7.js"><link rel="prefetch" href="/assets/js/41.a85c18e6.js"><link rel="prefetch" href="/assets/js/5.b42ba372.js"><link rel="prefetch" href="/assets/js/6.1a1baeca.js"><link rel="prefetch" href="/assets/js/8.43850db6.js"><link rel="prefetch" href="/assets/js/9.cb094fa1.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.77d639ce.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/img/logo.jpeg" alt="CKL" class="logo"> <span class="site-name can-hide">CKL</span></a> <div class="links" style="max-width:nullpx;"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/timeLine/" class="nav-link">首页</a></div><div class="nav-item"><a href="/technology/" class="nav-link router-link-active">技术</a></div><div class="nav-item"><a href="/life/" class="nav-link">生活</a></div><div class="nav-item"><a href="/ponder/" class="nav-link">思考</a></div><div class="nav-item"><a href="/tags/" class="nav-link">标签库</a></div><div class="nav-item"><a href="/about/" class="nav-link">关于</a></div> <!----></nav> <div style="display:none;">
+   音乐
+  <div role="switch" class="el-switch"><input type="checkbox" name="" true-value="true" class="el-switch__input"><!----><span class="el-switch__core" style="width:40px;"></span><!----></div> <audio loop="loop"><source src="/assets/media/yui - you.e3d66957.mp3" type="audio/mpeg"></audio></div></div></header> <div class="sidebar-mask"></div> <div class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/timeLine/" class="nav-link">首页</a></div><div class="nav-item"><a href="/technology/" class="nav-link router-link-active">技术</a></div><div class="nav-item"><a href="/life/" class="nav-link">生活</a></div><div class="nav-item"><a href="/ponder/" class="nav-link">思考</a></div><div class="nav-item"><a href="/tags/" class="nav-link">标签库</a></div><div class="nav-item"><a href="/about/" class="nav-link">关于</a></div> <!----></nav>  <ul class="sidebar-links"><li><div class="sidebar-group first"><p class="sidebar-heading open"><span>构建贝叶斯AB测试</span> <!----></p> <ul class="sidebar-group-items"><li><a href="/technology/bayesian/ABtest.html#_1-例子" class="sidebar-link">1 例子</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/technology/bayesian/ABtest.html#_2-找出先验概率" class="sidebar-link">2 找出先验概率</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/technology/bayesian/ABtest.html#_3-搜集数据" class="sidebar-link">3 搜集数据</a><ul class="sidebar-sub-headers"></ul></li></ul></div></li></ul> </div> <div class="page"> <div class="content"><h1 id="构建贝叶斯ab测试"><a href="#构建贝叶斯ab测试" class="header-anchor">#</a> 构建贝叶斯AB测试</h1> <h2 id="_1-例子"><a href="#_1-例子" class="header-anchor">#</a> 1 例子</h2> <p>假设我们有600个用户, 由于要使用试验中获得的知识, 因此只对其中的300人进行测试. 根据试验结果,那么就只能对剩下的300人采用更有效的营销形式.</p> <p>我们把要测试的300人分成A,B两组:A组会收到与往常一样的邮件, 最上面又一张大图;B组会收到没有图片的邮件.希望简洁的邮件不会让用户认为是垃圾邮件,还能鼓励用户点击其中的内容.</p> <h2 id="_2-找出先验概率"><a href="#_2-找出先验概率" class="header-anchor">#</a> 2 找出先验概率</h2> <p>根据目前已有的数据,有以下合理预期:对于任何给定的邮件,链接点击率在30%左右;以下为步骤</p> <p>A)为了简单起见,我们对两个变体使用相同的先验概率.</p> <p>B)我们还将选择一个较弱的先验的分布,这意味着转化率的概率范围很大,之所以选择一个较弱的先验,是因为我们不知道期待的变体B会表现的怎样,而且这是一个新的活动,所以其他因素也会影响转化率,结果有可能更好也有可能更差;</p> <p>C)这里我们用Beta(3,7)作为先验概率分布, 这个贝塔分布的均值是0.3,而且能够表示转化率的概率范围很大.</p> <p>D)这一步需要的是似然,意味着需要去搜集数据</p> <h2 id="_3-搜集数据"><a href="#_3-搜集数据" class="header-anchor">#</a> 3 搜集数据</h2> <table><thead><tr><th style="text-align:left"></th> <th style="text-align:left">点击</th> <th style="text-align:left">未点击</th> <th style="text-align:left">观察到的转化率</th></tr></thead> <tbody><tr><td style="text-align:left">A</td> <td style="text-align:left">36</td> <td style="text-align:left">114</td> <td style="text-align:left">0.24</td></tr> <tr><td style="text-align:left">B</td> <td style="text-align:left">50</td> <td style="text-align:left">100</td> <td style="text-align:left">0.33</td></tr></tbody></table> <p>A)我们可以将这两个变体视为想要估计的单独参数,为了得到每个变体的后验分布,需要分别结合他们各自的似然分布和先验分布.</p> <p>B)这里这些变体的先验分布是Beta(3,7), 它代表一个相对较弱的信念,即在没有额外信息的情况下,我们对转化率的可能期望值较低.之所以说这是一个较弱的信念,是因为我们并不十分相信某个特定的数值范围,而是考虑了具有高概率的所有可能的转化率.</p> <p>C)对每个变体的似然,我们也同样使用贝塔分布,其中参数a等于链接被点击的次数.</p> <p>回顾:
+<font color="red">
+Beta(a后验,b后验)=Beta(a先验+b似然, b先验+b似然)
+</font></p> <p>因此,变体A用分布Beta(3+36,7+114)来表示;</p> <p>变体B用分布Beta(3+50,7+150)来表示</p> <p>如下图:</p> <p>具体代码:</p> <div class="language- extra-class"><pre class="language-text"><code>from scipy.stats import beta
+import os
+
+
+alpha_prior=3
+beta_prior=7
+
+conversions_from_A=36
+conversions_from_B=50
+
+visitors_to_A=150
+visitors_to_B=150
+
+
+posterior_A=beta(alpha_prior+conversions_from_A,beta_prior+visitors_to_A-conversions_from_A)
+posterior_B=beta(alpha_prior+conversions_from_B,beta_prior+visitors_to_B-conversions_from_B)
+
+
+'''
+
+#用采样来判断哪个组的转化率更高
+samples=20000
+samples_posterior_A=posterior_A.rvs(samples)
+samples_posterior_B=posterior_B.rvs(samples)
+
+
+#print('dd')
+aa=samples_posterior_A
+bb=samples_posterior_B
+print(aa)
+print(bb)
+#print((samples_posterior_A &gt; samples_posterior_B).mean()) #注意这里的mean()要在print括号里面
+
+
+
+'''
+
+
+from IPython.core.pylabtools import figsize
+from matplotlib import pyplot as plt
+import numpy as np
+
+
+figsize(12.5, 4)
+
+#这里的dpi可以控制图片的大小
+plt.rcParams['savefig.dpi']=100
+plt.rcParams['figure.dpi']=100
+
+x=np.linspace(0,1,500)
+plt.plot(x,posterior_A.pdf(x),label='posterior of A')
+plt.plot(x,posterior_B.pdf(x),label='posterior of B')
+
+plt.xlabel('Value')
+plt.ylabel('Density')
+plt.title(&quot;Posterior of distributions of the conversion rates of Web page $A$ and $B$&quot;)
+
+
+#给图像加上图例
+plt.legend()
+
+
+'''
+#保存图片在文件夹
+figure_save_path=&quot;file_fig&quot;
+if not os.path.exists(figure_save_path):
+    os.makedirs(figure_save_path)
+
+plt.savefig(os.path.join(figure_save_path,'abTest1.jpg'))
+
+
+'''
+
+
+
+
+
+
+plt.show() 
+
+
+
+
+
+</code></pre></div></div> <div class="page-edit"><!----> <!----></div> <!----> </div> <!----></div></div>
+    <script src="/assets/js/app.76659ae3.js" defer></script><script src="/assets/js/7.7c056201.js" defer></script><script src="/assets/js/21.adc9ee61.js" defer></script>
+  </body>
+</html>

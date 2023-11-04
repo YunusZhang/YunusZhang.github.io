@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>博客的重构 | CKL</title>
+    <meta name="description" content="">
+    <link rel="icon" href="/img/logo.jpeg">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/2.10.0/github-markdown.min.css">
+    
+    <link rel="preload" href="/assets/css/0.styles.77d639ce.css" as="style"><link rel="preload" href="/assets/js/app.76659ae3.js" as="script"><link rel="preload" href="/assets/js/7.7c056201.js" as="script"><link rel="preload" href="/assets/js/38.adb7b35e.js" as="script"><link rel="prefetch" href="/assets/js/10.0524636a.js"><link rel="prefetch" href="/assets/js/11.947c16a3.js"><link rel="prefetch" href="/assets/js/12.51c4984b.js"><link rel="prefetch" href="/assets/js/13.ec23b4a0.js"><link rel="prefetch" href="/assets/js/14.0d704076.js"><link rel="prefetch" href="/assets/js/15.114d913b.js"><link rel="prefetch" href="/assets/js/16.94731e60.js"><link rel="prefetch" href="/assets/js/17.de3739c5.js"><link rel="prefetch" href="/assets/js/18.718702c6.js"><link rel="prefetch" href="/assets/js/19.44ce7a3e.js"><link rel="prefetch" href="/assets/js/2.38932ee6.js"><link rel="prefetch" href="/assets/js/20.95f77a6e.js"><link rel="prefetch" href="/assets/js/21.adc9ee61.js"><link rel="prefetch" href="/assets/js/22.1a4d3107.js"><link rel="prefetch" href="/assets/js/23.ab28b9fb.js"><link rel="prefetch" href="/assets/js/24.f0491f8c.js"><link rel="prefetch" href="/assets/js/25.ebff061e.js"><link rel="prefetch" href="/assets/js/26.fd399e9e.js"><link rel="prefetch" href="/assets/js/27.4634fdc1.js"><link rel="prefetch" href="/assets/js/28.0d72eb05.js"><link rel="prefetch" href="/assets/js/29.e20e7f51.js"><link rel="prefetch" href="/assets/js/3.a3a27c44.js"><link rel="prefetch" href="/assets/js/30.4ef1be23.js"><link rel="prefetch" href="/assets/js/31.af729026.js"><link rel="prefetch" href="/assets/js/32.b74e43bc.js"><link rel="prefetch" href="/assets/js/33.1fc9bd38.js"><link rel="prefetch" href="/assets/js/34.4c884e92.js"><link rel="prefetch" href="/assets/js/35.69ef4130.js"><link rel="prefetch" href="/assets/js/36.f9a6fa95.js"><link rel="prefetch" href="/assets/js/37.d3f2b3c3.js"><link rel="prefetch" href="/assets/js/39.ec26ba26.js"><link rel="prefetch" href="/assets/js/4.dd247e61.js"><link rel="prefetch" href="/assets/js/40.3f22cde7.js"><link rel="prefetch" href="/assets/js/41.a85c18e6.js"><link rel="prefetch" href="/assets/js/5.b42ba372.js"><link rel="prefetch" href="/assets/js/6.1a1baeca.js"><link rel="prefetch" href="/assets/js/8.43850db6.js"><link rel="prefetch" href="/assets/js/9.cb094fa1.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.77d639ce.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/img/logo.jpeg" alt="CKL" class="logo"> <span class="site-name can-hide">CKL</span></a> <div class="links" style="max-width:nullpx;"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/timeLine/" class="nav-link">首页</a></div><div class="nav-item"><a href="/technology/" class="nav-link router-link-active">技术</a></div><div class="nav-item"><a href="/life/" class="nav-link">生活</a></div><div class="nav-item"><a href="/ponder/" class="nav-link">思考</a></div><div class="nav-item"><a href="/tags/" class="nav-link">标签库</a></div><div class="nav-item"><a href="/about/" class="nav-link">关于</a></div> <!----></nav> <div style="display:none;">
+   音乐
+  <div role="switch" class="el-switch"><input type="checkbox" name="" true-value="true" class="el-switch__input"><!----><span class="el-switch__core" style="width:40px;"></span><!----></div> <audio loop="loop"><source src="/assets/media/yui - you.e3d66957.mp3" type="audio/mpeg"></audio></div></div></header> <div class="sidebar-mask"></div> <div class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/timeLine/" class="nav-link">首页</a></div><div class="nav-item"><a href="/technology/" class="nav-link router-link-active">技术</a></div><div class="nav-item"><a href="/life/" class="nav-link">生活</a></div><div class="nav-item"><a href="/ponder/" class="nav-link">思考</a></div><div class="nav-item"><a href="/tags/" class="nav-link">标签库</a></div><div class="nav-item"><a href="/about/" class="nav-link">关于</a></div> <!----></nav>  <ul class="sidebar-links"><li><div class="sidebar-group first"><p class="sidebar-heading open"><span>博客的重构</span> <!----></p> <ul class="sidebar-group-items"><li><a href="/technology/vue/20191020_myblog.html#_1-问题出现" class="sidebar-link">1 问题出现</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/technology/vue/20191020_myblog.html#_2-分析" class="sidebar-link">2 分析</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/technology/vue/20191020_myblog.html#_3-解决方法" class="sidebar-link">3 解决方法</a><ul class="sidebar-sub-headers"></ul></li></ul></div></li></ul> </div> <div class="page"> <div class="content"><h1 id="解决无法部署的问题"><a href="#解决无法部署的问题" class="header-anchor">#</a> 解决无法部署的问题</h1> <h2 id="_1-问题出现"><a href="#_1-问题出现" class="header-anchor">#</a> 1 问题出现</h2> <p>某次在更新完内容的,要部署的时候,突然出现了提示 WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED! 而失败的解决方法</p> <p>报错提示如下
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@    WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!     @
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+IT IS POSSIBLE THAT SOMEONE IS DOING SOMETHING NASTY!
+Someone could be eavesdropping on you right now (man-in-the-middle attack)!
+It is also possible that a host key has just been changed.
+The fingerprint for the RSA key sent by the remote host is
+SHA256:uNiVztksCsDhcc0u9e8BujQXVUpKZIDTMczCvj3tD2s.
+Please contact your system administrator.
+Add correct host key in /c/Users/xxxxx/.ssh/known_hosts to get rid of this message.
+Offending RSA key in /c/Users/xxxxx/.ssh/known_hosts:2
+Host key for github.com has changed and you have requested strict checking.
+Host key verification failed.
+fatal: Could not read from remote repository.</p> <p>Please make sure you have the correct access rights
+and the repository exists.</p> <h2 id="_2-分析"><a href="#_2-分析" class="header-anchor">#</a> 2 分析</h2> <p>可能是官方更改了认证方式, 现在不能用用户名密法的方式, 要用生成密钥的方式, 或者直接删除known_hosts文件</p> <h2 id="_3-解决方法"><a href="#_3-解决方法" class="header-anchor">#</a> 3 解决方法</h2> <p>最简单的方式就是删除上面提到的 known_hosts 文件，例如我的文件是 /c/Users/xxxxx/.ssh/known_hosts 路径，直接使用 rm 命令删除，代码如下</p> <p>rm /c/Users/xxxxx/.ssh/known_hosts</p> <p>复制
+还请在你电脑上执行以上命令的时候，替换为你自己的电脑上的路径</p> <p>执行完成之后，重新推拉代码，可以看到以下提示信息，只需要输入 yes 回车即可</p> <p>The authenticity of host 'github.com (20.205.243.166)' can't be established.
+ED25519 key fingerprint is SHA256:+DiY3wvvV6TuJJhbpZisF/zLDA0zPMSvHdkr4UvCOqU.
+This key is not known by any other names
+Are you sure you want to continue connecting (yes/no/[fingerprint])?</p> <p>复制
+以上步骤就是在将 github 添加到 known_hosts 文件里</p> <p>也就是下一次推拉代码就不需要再次执行以上步骤</p></div> <div class="page-edit"><!----> <!----></div> <!----> </div> <!----></div></div>
+    <script src="/assets/js/app.76659ae3.js" defer></script><script src="/assets/js/7.7c056201.js" defer></script><script src="/assets/js/38.adb7b35e.js" defer></script>
+  </body>
+</html>
